@@ -1,6 +1,6 @@
 import * as THREE from './lib/three.module.js';
 
-import { GLTFLoader } from './lib/GLTFLoader.js';
+import { GLBLoader } from './lib/GLBLoader.js';
 import { DRACOLoader } from './lib/DRACOLoader.js';
 
 import { init } from './init.js'
@@ -28,15 +28,15 @@ function main() {
     var { scene, renderer, camera } = init(THREE);
     var scene = get_lights(THREE, scene)
 
-    const loader = new GLTFLoader();
+    const loader = new GLBLoader();
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('./js/lib/')
     loader.setDRACOLoader(dracoLoader);
     loader.load(
-        // gltf-pipeline -i model.glb -o model.gltf -d
-        './gltf/model.gltf',
-        function (gltf) {
-            model = gltf.scene;
+        // GLB-pipeline -i model.glb -o model.glb -d
+        './GLB/model.glb',
+        function (GLB) {
+            model = GLB.scene;
             model.castShadow = true
             model.scale.set(MODEL_SCALE, MODEL_SCALE, MODEL_SCALE)
             model.traverse(function (node) {
@@ -51,9 +51,9 @@ function main() {
                 }
             });
 
-            mixer = new THREE.AnimationMixer(gltf.scene);
-            for (var i = 0; i < gltf.animations.length; i++) {
-                var action = mixer.clipAction(gltf.animations[i]);
+            mixer = new THREE.AnimationMixer(GLB.scene);
+            for (var i = 0; i < GLB.animations.length; i++) {
+                var action = mixer.clipAction(GLB.animations[i]);
                 action.play();
             }
             scene.add(model);

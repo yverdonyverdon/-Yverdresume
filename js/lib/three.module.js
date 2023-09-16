@@ -20814,12 +20814,12 @@ const AnimationUtils = {
         continue;
       let referenceOffset = 0;
       const referenceValueSize = referenceTrack.getValueSize();
-      if (referenceTrack.createInterpolant.isInterpolantFactoryMethodGLTFCubicSpline) {
+      if (referenceTrack.createInterpolant.isInterpolantFactoryMethodGLBCubicSpline) {
         referenceOffset = referenceValueSize / 3;
       }
       let targetOffset = 0;
       const targetValueSize = targetTrack.getValueSize();
-      if (targetTrack.createInterpolant.isInterpolantFactoryMethodGLTFCubicSpline) {
+      if (targetTrack.createInterpolant.isInterpolantFactoryMethodGLBCubicSpline) {
         targetOffset = targetValueSize / 3;
       }
       const lastIndex = referenceTrack.times.length - 1;
